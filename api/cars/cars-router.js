@@ -5,7 +5,12 @@ const router = express.Router();
 
 // [GET] /api/cars
 router.get('/', async (req, res, next) => {
-  res.json('Get all cars');
+  try {
+    const cars = await Car.getAll();
+    res.json(cars);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // [GET] /api/cars/:id
